@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -84,6 +85,14 @@ public class ObjectPoolSpawner : MonoBehaviour
     {
         GameObject obj = GetObject();
         obj.transform.position = transform.position;
+
+        StartCoroutine(ReturnObjectAfterDelay(obj, 10f));
+    }
+
+    private IEnumerator ReturnObjectAfterDelay(GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ReturnObject(obj);
     }
 
     public void MoveLeft()
